@@ -159,10 +159,21 @@
     UILabel *labelTitle=[self loadTitle];
     
     //加载商品名称
-    UILabel *producName=[self loadProductName];
+    UILabel *labelName=[self loadProductName];
     
     //加载商品产地
-    UILabel *productSource=[self loadSource];
+    UILabel *labelSource=[self loadSource];
+    
+    //加载商品价格
+    UILabel *labelPrice=[self loadPrice];
+    
+    //加载商品总量
+    UILabel *labelAmount=[self loadAmount];
+    
+    //加载发送时间
+    UILabel *labelDate=[self loadDate];
+    
+    
     
     
     
@@ -170,8 +181,11 @@
     [cell.contentView addSubview:lineView];
     [cell.contentView addSubview:imageView];
     [cell.contentView addSubview:labelTitle];
-    [cell.contentView addSubview:producName];
-    [cell.contentView addSubview:productSource];
+    [cell.contentView addSubview:labelName];
+    [cell.contentView addSubview:labelSource];
+    [cell.contentView addSubview:labelPrice];
+    [cell.contentView addSubview:labelAmount];
+    [cell.contentView addSubview:labelDate];
     return cell;
     
 }
@@ -209,6 +223,7 @@
 
 
 
+
 //加载产品标题
 
 -(UILabel*)  loadTitle
@@ -230,7 +245,7 @@
 //加载产品名称
 -(UILabel*) loadProductName
 {
-    UILabel *productName=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.35f, SCREEN_HEIGHT*0.09f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
+    UILabel *productName=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.35f, SCREEN_HEIGHT*0.085f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
     [productName setText:@"青萝卜"];
     [productName setTextColor:[UIColor colorWithRed:8.0f/255.0f green:158.0f/255.0f blue:22.0f/255.0f alpha:1.0f]];
     return  productName;
@@ -239,11 +254,44 @@
 //加载产地
 -(UILabel*) loadSource
 {
-    UILabel *sourceName=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.6f, SCREEN_HEIGHT*0.09f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
+    UILabel *sourceName=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.65f, SCREEN_HEIGHT*0.085f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
     [sourceName setText:@"山东寿光"];
     return  sourceName;
 }
 
+//加载产品价格
+-(UILabel*) loadPrice
+{
+    UILabel *labelPrice=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.35f, SCREEN_HEIGHT*0.12f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
+    CGFloat  price=3.0;
+    NSString *strPrice=[NSString stringWithFormat:@"¥%.02f元／斤",price];
+    [labelPrice setText:strPrice];
+    [labelPrice setTextColor:[UIColor colorWithRed:8.0f/255.0f green:158.0f/255.0f blue:22.0f/255.0f alpha:1.0f]];
+    return labelPrice;
+}
+
+//加载产品总量
+-(UILabel*) loadAmount
+{
+    UILabel *labelAmount=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.65f, SCREEN_HEIGHT*0.12f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
+    NSInteger  amount=10000;
+    NSString *strAmount=[NSString stringWithFormat:@"%ld斤",(long)amount];
+    [labelAmount setText:strAmount];
+    
+    return labelAmount;
+    
+}
+
+//加载发送时间
+-(UILabel*) loadDate
+{
+    UILabel *labelDate=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.8f, SCREEN_HEIGHT*0.14f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
+    NSString *strDate=@"2015-10-10";
+    [labelDate setText:strDate];
+    [labelDate setFont:[UIFont systemFontOfSize:13]];
+    [labelDate setTextColor:[UIColor lightGrayColor]];
+    return labelDate;
+}
 
 
 
