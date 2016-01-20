@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "d4aaabd6-9860-42b6-b1d4-c34c12bb597f++8590",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "d4aaabd6-9860-42b6-b1d4-c34c12bb597f++8590" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "d4aaabd6-9860-42b6-b1d4-c34c12bb597f++8590" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A7FE4E83-87D4-44B9-96D0-9FFF7C63A694",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "d4aaabd6-9860-42b6-b1d4-c34c12bb597f++8590" : "repos\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Jiayan Livelihood",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "嘉言民生项目\/Jiayan Livelihood\/Jiayan Livelihood.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/101.200.196.121",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "d4aaabd6-9860-42b6-b1d4-c34c12bb597f++8590"
+    }
+  ]
+}
