@@ -7,6 +7,8 @@
 //
 
 #import "SellViewController.h"
+#import "RDVTabBarController/RDVTabBarController.h"
+#import "SellDetailViewController.h"
 #import "MXPullDownMenu.h"
 
 @interface SellViewController ()<MXPullDownMenuDelegate,UITableViewDataSource,UITableViewDelegate,UISearchControllerDelegate,UISearchResultsUpdating>{
@@ -27,9 +29,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    //self.view.backgroundColor=[UIColor redColor];
+    
+    
+    //创建ui
     [self creatUI];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    //显示tabbar
+    [self displayTabbar];
+}
+
+-(void)displayTabbar
+{
+     [self.parentViewController.rdv_tabBarController setTabBarHidden:NO];
     
 }
 #pragma mark --UI
@@ -198,6 +213,12 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return SCREEN_HEIGHT/5;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SellDetailViewController *sdVC=[[SellDetailViewController alloc]init];
+    [self.navigationController pushViewController:sdVC animated:YES];
 }
 
 //----------------------------------------------

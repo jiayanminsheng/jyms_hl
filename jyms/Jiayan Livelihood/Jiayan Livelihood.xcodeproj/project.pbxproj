@@ -262,6 +262,7 @@
 		33A1EA4D1C3BB91B008774E4 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A1EA3E1C3BB91B008774E4 /* AFURLSessionManager.m */; };
 		33A1EA4E1C3BB91B008774E4 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A1EA401C3BB91B008774E4 /* UIButton+AFNetworking.m */; };
 		33A1EA4F1C3BB91B008774E4 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A1EA421C3BB91B008774E4 /* UIImageView+AFNetworking.m */; };
+		7ECEAB571C50093F00467D6E /* SellDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ECEAB561C50093F00467D6E /* SellDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -611,6 +612,8 @@
 		33A1EA401C3BB91B008774E4 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
 		33A1EA411C3BB91B008774E4 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		33A1EA421C3BB91B008774E4 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		7ECEAB551C50093F00467D6E /* SellDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SellDetailViewController.h; sourceTree = "<group>"; };
+		7ECEAB561C50093F00467D6E /* SellDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SellDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -661,6 +664,8 @@
 				147EF54F1C429ECA00C4A459 /* SellViewController.h */,
 				147EF5501C429ECA00C4A459 /* SellViewController.m */,
 				147EF5511C429ECA00C4A459 /* SellViewController.xib */,
+				7ECEAB551C50093F00467D6E /* SellDetailViewController.h */,
+				7ECEAB561C50093F00467D6E /* SellDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -1709,6 +1714,7 @@
 				334D03C31C3E3B1F00AADCEC /* ExpertViewController.m in Sources */,
 				334D03B71C3E38D400AADCEC /* SCNavTabBar.m in Sources */,
 				33A1EA241C3B8BF9008774E4 /* BQMLabel.m in Sources */,
+				7ECEAB571C50093F00467D6E /* SellDetailViewController.m in Sources */,
 				333E00A41C4740310096FE44 /* MJRefreshBackNormalFooter.m in Sources */,
 				33A1EA4A1C3BB91B008774E4 /* AFURLConnectionOperation.m in Sources */,
 				333E00A71C4740310096FE44 /* MJRefreshNormalHeader.m in Sources */,
