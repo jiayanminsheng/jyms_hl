@@ -449,6 +449,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
     {
         gzsnView=UIScrollView(frame:CGRectMake(0,sHeight*0.35,sWidth,sHeight*0.614))
         gzsnView.scrollEnabled=true;
+        gzsnView.bounces=false
         gzsnView.showsHorizontalScrollIndicator=true;
         gzsnView.contentSize=CGSizeMake(sWidth, sHeight*0.845)
         
