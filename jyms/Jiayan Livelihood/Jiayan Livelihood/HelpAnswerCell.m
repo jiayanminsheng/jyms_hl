@@ -16,35 +16,43 @@
     //头像暂无
     self.userNameLabel.text=model.username;
     //时间
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];//设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
-    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
-    [formatter setTimeZone:timeZone];
-    NSDate *datenow = [NSDate date];
-    //    [dm setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-    NSDate * newdate = [formatter dateFromString:model.addtime];
-    long dd = (long)[datenow timeIntervalSince1970] - [newdate timeIntervalSince1970];
-    NSString *timeString=@"";
-    if (dd/3600<1)
-    {
-        timeString = [NSString stringWithFormat:@"%ld", dd/60];
-        timeString=[NSString stringWithFormat:@"%@分钟前", timeString];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    NSDate *date1=[dateFormatter dateFromString:model.addtime];
+    NSDate *date2=[NSDate date];
+    NSTimeInterval time=[date2 timeIntervalSinceDate:date1];
+    long temp;
+    NSString *result=[[NSString alloc]init];
+    if (time < 60) {
+        result = [NSString stringWithFormat:@"刚刚"];
     }
-    if (dd/3600>1&&dd/86400<1)
-    {
-        timeString = [NSString stringWithFormat:@"%ld", dd/3600];
-        timeString=[NSString stringWithFormat:@"%@小时前", timeString];
+    else if((temp = time/60) <60){
+        result = [NSString stringWithFormat:@"%ld分前",temp];
     }
-    if (dd/86400>1)
-    {
-        timeString = [NSString stringWithFormat:@"%ld", dd/86400];
-        timeString=[NSString stringWithFormat:@"%@天前", timeString];
+    
+    else if((temp = temp/60) <24){
+        result = [NSString stringWithFormat:@"%ld小时前",temp];
     }
-    self.releasetimeLabel.text=timeString;
+    
+    else if((temp = temp/24) <30){
+        result = [NSString stringWithFormat:@"%ld天前",temp];
+    }
+    
+    else if((temp = temp/30) <12){
+        result = [NSString stringWithFormat:@"%ld个月前",temp];
+    }
+    else{
+        temp = temp/12;
+        result = [NSString stringWithFormat:@"%ld年前",temp];
+    }
+
+    self.releasetimeLabel.text=result;
+    
     self.answercountLabel.text=[NSString stringWithFormat:@"%@",model.question_status];
     
+    
+    
 }
-
 
 - (void)awakeFromNib {
     // Initialization code

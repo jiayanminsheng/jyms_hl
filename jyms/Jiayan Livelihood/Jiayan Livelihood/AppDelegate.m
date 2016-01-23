@@ -1,17 +1,11 @@
-//
-//  AppDelegate.m
-//  Jiayan Livelihood
-//
-//  Created by bqm on 16/1/5.
-//  Copyright © 2016年 bqm. All rights reserved.
-//
+//v1.01
 
 #import "AppDelegate.h"
 //#import "RootViewController.h"
 #import "startViewController.h"
 #import "LoginViewController.h"
 #import "AFNetworking.h"
-#import "jiayan-swift.h"
+
 
 @interface AppDelegate ()<UIAlertViewDelegate>
 
@@ -96,12 +90,12 @@
                 tipStr=@"当前网络状态未知，查看网络设置";
                 break;
         }
-        UIAlertView *tipMes=[[UIAlertView alloc]initWithTitle:@"温馨提示" message:tipStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-        [tipMes show];
+//        UIAlertView *tipMes=[[UIAlertView alloc]initWithTitle:@"温馨提示" message:tipStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
+//        [tipMes show];
     }];
     
     // 3.开始监听
-    [_manager startMonitoring];
+//    [_manager startMonitoring];
     
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{

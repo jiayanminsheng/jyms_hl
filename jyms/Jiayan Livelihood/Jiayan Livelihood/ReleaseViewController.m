@@ -11,8 +11,9 @@
 #import "AFHelper.h"
 #import "UserPrefs.h"
 
-@interface ReleaseViewController (){
+@interface ReleaseViewController ()<UITextViewDelegate>{
     UITextView *_question;
+    
 }
 
 @end
@@ -49,13 +50,26 @@
     
     //问题
     _question=[[UITextView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    _question.text=@"在此描述您要咨询的问题内容";
+    _question.delegate=self;
     [self.view addSubview:_question];
+    UILabel *placeHolder=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 300, 30)];
+    placeHolder.tag=10;
+    placeHolder.text=@"在此描述您要咨询的问题内容";
+    placeHolder.enabled=NO;
+    placeHolder.backgroundColor=[UIColor clearColor];
+    [_question addSubview:placeHolder];
     
-    
 
-
-
+}
+//实现UITextView的代理
+-(void)textViewDidChange:(UITextView *)textView
+{
+    UILabel *label=[self.view viewWithTag:10];
+    if (textView.text.length == 0) {
+        label.text = @"在此描述您要咨询的问题内容";
+    }else{
+        label.text = @"";
+    } 
 }
 
 -(void)backBtnClicked:(UIButton *)btn{
@@ -74,7 +88,7 @@
     [params setObject:_question.text forKey:@"questions"];
     [AFHelper PostWithPath:@"/basic/show.ashx" andParameters:params andSuccess:^(id responseObject) {
         NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        if (dic[@"error"]) {
+        if ([dic[@"error"] intValue]==0) {
             [self showHUDWithMessage:@"提交成功！" view:self.view];
         }else{
         

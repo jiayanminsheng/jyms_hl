@@ -65,7 +65,7 @@
     [self setBackgroundColor:[UIColor clearColor]];
     
     _title = @"";
-    _titlePositionAdjustment =  UIOffsetMake(0, 3.5f);
+    _titlePositionAdjustment = UIOffsetZero;
     
     if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
         _unselectedTitleAttributes = @{

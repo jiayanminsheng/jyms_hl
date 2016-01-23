@@ -28,8 +28,10 @@
 @implementation AnswerViewController
 -(void)viewWillAppear:(BOOL)animated{
  [super viewWillAppear:animated];
+
    self.rdv_tabBarController.tabBarHidden = NO;
     _search.searchBar.hidden=NO;
+    self.navigationController.toolbarHidden=YES;
 
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -48,7 +50,7 @@
 #pragma mark --数据初始化
 -(void)initData{
 
-    _dataArr=[[NSMutableArray alloc]init];
+   
     _searchArr=[[NSMutableArray alloc]init];
     _predicateArr=[[NSMutableArray alloc]init];
 
@@ -57,6 +59,7 @@
 }
 #pragma mark  --下载数据
 -(void)DownLoadData{
+     _dataArr=[[NSMutableArray alloc]init];
     NSMutableDictionary *params=[[NSMutableDictionary alloc]init];
     [params setObject:@"q_list" forKey:@"key"];
     [AFHelper PostWithPath:@"/basic/show.ashx" andParameters:params andSuccess:^(id responseObject) {
@@ -131,21 +134,27 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     _tableView.rowHeight=UITableViewAutomaticDimension;//（使用这个默认值自适应高度）
-    _tableView.estimatedRowHeight=106;//（xib中cell的高度）
+    _tableView.estimatedRowHeight=153;
     [_tableView registerNib:[UINib nibWithNibName:@"HelpAnswerCell" bundle:nil] forCellReuseIdentifier:@"Answer"];
      [_tableView.header beginRefreshing];
     _tableView.header=[MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        _search.searchBar.showsCancelButton=NO;
-        _search.searchBar.text=nil;
-        [self DownLoadData];
+        //判断搜索处于编辑状态，下拉的时候不重新下载数据，不刷新tableview
+        if (!(_search.searchBar.showsCancelButton)) {
+            
+            [self DownLoadData];
+        }else{
+        [_tableView.header endRefreshing];
+        }
     }];
     [self.view addSubview:_tableView];
     
 
 }
+
+
 #pragma mark --UISearchResultsUpdating
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController{
-    _search.searchBar.showsCancelButton=YES;
+
     //输关键字实时调用
     NSString * str = searchController.searchBar.text;
     //沙漏，用来筛选数据
@@ -196,11 +205,11 @@
 }
 
 #pragma mark --UITableViewDelegate
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    return 106;
-
-}
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+//    return 150;
+//
+//}
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.0000001;
 

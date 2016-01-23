@@ -5,12 +5,21 @@
 import UIKit
 
 
+
+
+
+
+
 public let sHeight = UIScreen.mainScreen().bounds.height;                               //屏幕高
 public let sWidth  = UIScreen.mainScreen().bounds.width;                                //屏幕宽
 public let themeColor = UIColor(red: 35/255, green: 176/255, blue: 74/255, alpha: 1.0); //主题色
 public let tabColor   = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0); //tabbar颜色
 public let contentColor = UIColor(red: 180/255, green: 180/255, blue: 180/255, alpha: 1.0);//公司简介字体颜色
 public let textColor = UIColor(red: 120/255, green: 120/255, blue: 120/255, alpha: 1.0); //字体颜色1
+
+public let IS_IPHONE=(UIDevice.currentDevice().userInterfaceIdiom == .Phone)
+public let SCREEN_MAX_LENGTH=max(sHeight, sWidth)
+public let IS_IPHONE_4_OR_LESS=(IS_IPHONE && SCREEN_MAX_LENGTH<568.0)
 
 
 
@@ -58,11 +67,14 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         initGZSNView()    //关注三农初始化主页面
         initGZSNNews()    //关注三农初始化最新动态子页面
         
+        self.edgesForExtendedLayout = .None;
+        
         self.navigationController?.navigationItem.leftBarButtonItem=nil
         self.navigationItem.hidesBackButton=true;
         
         self.parentViewController?.rdv_tabBarController.tabBarHidden=false
         
+
         //让导航栏图片实现自适应
         let bgImg:UIImage = UIImage(named:"导航栏1")!
         let size:CGSize=bgImg.size
@@ -75,18 +87,19 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         imageView.image=bgImg
         
         self.navigationController?.navigationBar.addSubview(imageView)
-        
-        
 
+        
+        
+        
     }
-   
+    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
-    
+        
     }
     
-   
+    
     
     override func viewWillDisappear(animated: Bool)
     {
@@ -96,13 +109,13 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         self.jymsView.removeFromSuperview()
         self.gzsnView.removeFromSuperview()
     }
-        
+    
     
     //加载导航栏delegate
     func initNavDelegate()
     {
         self.navigationController?.delegate=self;
-
+        
     }
     
     //初始化滚动条
@@ -114,7 +127,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         ]
         let rect=CGRectMake(0,0,sWidth,sHeight*0.28)
         let sdView:SDCycleScrollView=SDCycleScrollView(frame: rect, imagesGroup: logoImage)
- 
+        
         
         self.view.addSubview(sdView)
         
@@ -141,7 +154,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         
         btnJYMS!.addTarget(self, action: Selector("jymsBtnTapped:"), forControlEvents: .TouchUpInside);
         btnGZSN!.addTarget(self, action: Selector("gzsnBtnTapped:"), forControlEvents: .TouchUpInside);
-  
+        
         
         switchView?.addSubview(btnJYMS!);
         switchView?.addSubview(btnGZSN!);
@@ -186,7 +199,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
     func initCompanyDetailView()
     {
         companyDetailView = UIView(frame: CGRectMake(0,sHeight*0.025,sWidth,sHeight*0.32));
-       
+        
         //公司简介
         let companyInfoView:UIButton=UIButton(frame: CGRectMake(0,0,sWidth*0.5,sHeight*0.32));
         companyInfoView.addTarget(self, action: Selector("CompanyInfoBtnTapped:"), forControlEvents: .TouchUpInside)
@@ -266,7 +279,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         
         jymsView.addSubview(contentView)
     }
-//--------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------
     //嘉言民生按钮点击触发
     func jymsBtnTapped(button:UIButton)
     {
@@ -298,11 +311,11 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
             removeJYMSFromView()//移除嘉言民生页面内容
             addGZMSFromView() //添加关注三农页面内容
             
-             subBtnIndex=1
+            subBtnIndex=1
         }
     }
     
-   //---------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------
     func CompanyInfoBtnTapped(button:UIButton)
     {
         //跳入公司信息页面
@@ -322,7 +335,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         imageView.removeFromSuperview()
         self.navigationController?.navigationBar.setBackgroundImage(nil, forBarMetrics:.Default)
         self.navigationController?.pushViewController(companyInfoVC, animated: true)
-      
+        
     }
     
     func btnPartnerTapped(button:UIButton)
@@ -354,7 +367,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         
     }
     
-//---------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------
     
     //主页面tableview
     //总行数
@@ -375,15 +388,30 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         imageView.image=image;
         
         //标题
-        let titleLabel:UILabel=UILabel(frame: CGRectMake(sWidth*0.38,sHeight*0.03,sWidth*0.6,sHeight*0.05));
+        let titleLabel:UILabel=UILabel(frame: CGRectMake(sWidth*0.38,sHeight*0.03,sWidth*0.6,sHeight*0.035));
         titleLabel.text="全区粮食生产合作社横县飘香水稻种植专业合作社";
+        if(IS_IPHONE_4_OR_LESS)
+        {
+            titleLabel.font=UIFont(name:"HelveticaNeue", size: 12)
+        }
+        else
+        {
+            titleLabel.font=UIFont(name:"HelveticaNeue", size: 14)
+        }
         titleLabel.numberOfLines=0;
         titleLabel.lineBreakMode = .ByWordWrapping;
         
         //内容概要
         let sumLabel:UILabel=UILabel(frame: CGRectMake(sWidth*0.37,sHeight*0.055,sWidth*0.6,sHeight*0.08));
         sumLabel.text="       深秋时节，走进横县飘香水稻种植专业合作社";
-        sumLabel.font=UIFont(name: "HelveticaNeue", size: 12);
+        if(IS_IPHONE_4_OR_LESS)
+        {
+           sumLabel.font=UIFont(name: "HelveticaNeue", size: 10);
+        }
+        else
+        {
+             sumLabel.font=UIFont(name: "HelveticaNeue", size: 12);
+        }
         sumLabel.numberOfLines=0;
         sumLabel.lineBreakMode = .ByWordWrapping
         sumLabel.textColor = contentColor;
@@ -398,8 +426,8 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         let numView:UILabel=UILabel(frame:CGRectMake(sWidth*0.86, sHeight*0.12, sWidth*0.08, sHeight*0.02))
         numView.text="1000"
         numView.font=UIFont(name: "HelveticaNeue", size: 10)
-
-
+        
+        
         
         
         
@@ -424,9 +452,9 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath?
     {
-        return nil;
+    return nil;
     }
-
+    
     */
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
@@ -437,12 +465,12 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         self.navigationController?.navigationBar.hidden=true
         self.parentViewController?.rdv_tabBarController.tabBarHidden=true
         
-       
+        
         self.navigationController?.pushViewController(newsVC, animated: true)
         
         
     }
-//--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     //关注三农页面
     
     func initGZSNView()
@@ -466,7 +494,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
         
         
         subTitleView.addSubview(subTitle);
-
+        
         
         gzsnView.addSubview(subTitleView);
         
@@ -484,7 +512,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
     
     
     
-//--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
     //移除嘉言民生页面内容
     func removeJYMSFromView()
     {
@@ -509,7 +537,7 @@ class HomeVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UINavig
     {
         self.view.addSubview(gzsnView)
     }
-
-
+    
+    
 }
 

@@ -161,19 +161,33 @@ class PolicyVC: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     //--------------------------------------------------------------------------
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func btnHomeTapped(button:UIButton)
     {
-        let newsVC:NewsVC = NewsVC()
+        let homeVC:HomeVC = HomeVC();
         
-        //隐藏tabbar和导航栏
-        self.navigationController?.navigationBar.hidden=true
-        self.parentViewController?.rdv_tabBarController.tabBarHidden=true
-        
-        
-        self.navigationController?.pushViewController(newsVC, animated: true)
-        
-        
+        self.presentViewController(homeVC, animated: true, completion: nil)
     }
+    
+    func btnPolicyTapped (button:UIButton)
+    {
+        print("222")
+    }
+    
+    func btnHelpTapped(button:UIButton)
+    {
+        print("333")
+    }
+    
+    func btnTradeTapped(button:UIButton)
+    {
+        print("444")
+    }
+    
+    func btnSelfTapped(button:UIButton)
+    {
+        print("555")
+    }
+
 
 
 }

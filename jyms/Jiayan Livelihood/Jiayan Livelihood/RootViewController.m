@@ -13,7 +13,7 @@
 #import "HelpViewController.h"
 #import "BusinessViewController.h"
 #import "PersonalCenterViewController.h"
-#import "jiayan-swift.h"
+#import "Jiayan Livelihood-Swift.h"
 
 @interface RootViewController ()
 
@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     
     // 首页
@@ -31,7 +32,7 @@
     HomeVC *homeVC=[[HomeVC alloc]init];
     UINavigationController *homeNC=[[UINavigationController alloc]initWithRootViewController:homeVC];
     [homeVC.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:28.0f/255.0f green:167.0f/255.0f blue:53.0f/255.0f alpha:1.0f]];
-    
+//    [homeVC.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"导航栏"] forBarMetrics:UIBarMetricsDefault];
     // 政策
 //    PolicyViewController *policyVC=[[PolicyViewController alloc]init];
     PolicyVC *policyVC=[[PolicyVC alloc]init];
@@ -55,8 +56,14 @@
     
     
     self.viewControllers = @[homeNC, policyNC, helpNC,businessNC,personalCenterNC];
+    if (self.type==1) {
+        self.selectedIndex=4;
+        
+    }
+
     //设置tabBar
     [self setupTabbar];
+    
 }
 
 -(void)setupTabbar
@@ -65,10 +72,10 @@
     NSArray * imageNames = @[@"首页icon",@"了解政策icon",@"需要帮助icon",@"我要买卖icon",@"个人中心icon"];
     
     // tabbar上文字信息
-    NSArray * nameArr = @[@"首  页", @"了解政策", @"需要帮助", @"我要买卖",@"个人中心"];
+    NSArray * nameArr = @[@"首页", @"了解政策", @"需要帮助", @"我要买卖",@"个人中心"];
     
-    NSDictionary * normalTitleAttri = @{NSFontAttributeName : [UIFont systemFontOfSize:12.0f], NSForegroundColorAttributeName :UIColorWithRGBA(47, 47, 47, 1)};
-    NSDictionary * selectedTitleAttri = @{NSFontAttributeName : [UIFont systemFontOfSize:12.0f], NSForegroundColorAttributeName : UIColorWithRGBA(35, 165, 58, 1)};
+    NSDictionary * normalTitleAttri = @{NSFontAttributeName : [UIFont systemFontOfSize:9.0f], NSForegroundColorAttributeName :UIColorWithRGBA(47, 47, 47, 1)};
+    NSDictionary * selectedTitleAttri = @{NSFontAttributeName : [UIFont systemFontOfSize:9.0f], NSForegroundColorAttributeName : UIColorWithRGBA(35, 165, 58, 1)};
     
     // 下标起始设置
     NSInteger index = 0;

@@ -18,6 +18,7 @@
     UILabel *_label;
     NSArray *_btnArr;
     NSArray *_btnSelArr;
+    AnswerViewController *_answerVC;
 }
 
 
@@ -46,9 +47,10 @@
     _btnArr=@[[UIImage imageNamed:@"问答平台.png"],[UIImage imageNamed:@"专家热线.png"]];
     _btnSelArr=@[[UIImage imageNamed:@"问答平台xz.png"],[UIImage imageNamed:@"专家热线选中态.png"]];
     for (int i=0; i<2; i++) {
-        UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake((SCREEN_WIDTH/2.0+0.5)*i, NAVBAR_HEIGHT, SCREEN_WIDTH/2.0-0.5, SCREEN_HEIGHT/10.0)];
+        UIButton *btn=[[UIButton alloc]initWithFrame:CGRectMake((SCREEN_WIDTH/2.0+0.5)*i, NAVBAR_HEIGHT, SCREEN_WIDTH/2.0-0.5, SCREEN_HEIGHT/13.0)];
         btn.backgroundColor=[UIColor whiteColor];
         [btn addTarget:self action:@selector(btnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        [btn setImageEdgeInsets:UIEdgeInsetsMake(SCREEN_HEIGHT/20.0f,SCREEN_WIDTH/3.0f , SCREEN_HEIGHT/20.0f,SCREEN_WIDTH/3.0f)];
         if (i==0) {
             [btn setImage:_btnSelArr[i] forState:UIControlStateNormal];
         }else{
@@ -59,20 +61,20 @@
         [self.view addSubview:btn];
     }
     //点击指示
-    _label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0-2.0, SCREEN_WIDTH/6.0, 2.0)];
+    _label=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0-2.0, SCREEN_WIDTH/6.0, 2.0)];
     _label.backgroundColor=UIColorWithRGBA(35, 165, 58, 1);
     [self.view addSubview:_label];
     
     
     //主要滑动视图
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0+1.0, SCREEN_WIDTH, SCREEN_HEIGHT-(NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0+1.0))];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0+1.0, SCREEN_WIDTH, SCREEN_HEIGHT-(NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0+1.0))];
 //    _scrollView.backgroundColor=[UIColor whiteColor];
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.bounces = NO;
     _scrollView.delegate = self;
-    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2,SCREEN_HEIGHT-(NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0+1.0));
+    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2,SCREEN_HEIGHT-(NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0+1.0));
     [self.view addSubview:_scrollView];
     [self addSubControllers];
     
@@ -80,13 +82,13 @@
 }
 -(void)addSubControllers
 {
-    AnswerViewController *answerVC=[[AnswerViewController alloc]init];
-    answerVC.view.frame=CGRectMake(SCREEN_WIDTH*0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-(NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0+1.0));
+    _answerVC=[[AnswerViewController alloc]init];
+    _answerVC.view.frame=CGRectMake(SCREEN_WIDTH*0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-(NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0+1.0));
     ExpertViewController *expertVC=[[ExpertViewController alloc]init];
-    expertVC.view.frame=CGRectMake(SCREEN_WIDTH*1, 0, SCREEN_WIDTH, SCREEN_HEIGHT-(NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0+1.0));
-    [_scrollView addSubview:answerVC.view];
+    expertVC.view.frame=CGRectMake(SCREEN_WIDTH*1, 0, SCREEN_WIDTH, SCREEN_HEIGHT-(NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0+1.0));
+    [_scrollView addSubview:_answerVC.view];
     [_scrollView addSubview:expertVC.view];
-    [self addChildViewController:answerVC];
+    [self addChildViewController:_answerVC];
     [self addChildViewController:expertVC];
     
 }
@@ -123,7 +125,11 @@
     
     //点击问答平台
     if (btn.tag==1) {
-        _label.frame=CGRectMake(SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0-2.0, SCREEN_WIDTH/6.0, 2.0);
+        [_scrollView addSubview:_answerVC.view];
+        [self addChildViewController:_answerVC];
+        
+        
+        _label.frame=CGRectMake(SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0-2.0, SCREEN_WIDTH/6.0, 2.0);
         UIButton *expertBtn=[self.view viewWithTag:btn.tag+1];
         [expertBtn setImage:_btnArr[btn.tag] forState:UIControlStateNormal];
         UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithCustomView:_releaseBtn];
@@ -133,7 +139,12 @@
     }
     //点击专家热线
     if (btn.tag==2) {
-        _label.frame=CGRectMake(SCREEN_WIDTH/2.0+SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0-2.0, SCREEN_WIDTH/6.0, 2.0);
+        //搜索控制器的改变
+        [_answerVC removeFromParentViewController];
+        [_answerVC.view removeFromSuperview];
+        
+        
+        _label.frame=CGRectMake(SCREEN_WIDTH/2.0+SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0-2.0, SCREEN_WIDTH/6.0, 2.0);
         UIButton *answerBtn=[self.view viewWithTag:btn.tag-1];
         [answerBtn setImage:_btnArr[btn.tag-2] forState:UIControlStateNormal];
         //移除发布按钮
@@ -150,7 +161,12 @@
     [btn setImage:_btnSelArr[btn.tag-1] forState:UIControlStateNormal];
     //点击问答平台
     if (btn.tag==1) {
-        _label.frame=CGRectMake(SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0-2.0, SCREEN_WIDTH/6.0, 2.0);
+        [_scrollView addSubview:_answerVC.view];
+        [self addChildViewController:_answerVC];
+
+        
+        
+        _label.frame=CGRectMake(SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0-2.0, SCREEN_WIDTH/6.0, 2.0);
         UIButton *expertBtn=[self.view viewWithTag:btn.tag+1];
         [expertBtn setImage:_btnArr[btn.tag] forState:UIControlStateNormal];
         UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithCustomView:_releaseBtn];
@@ -159,7 +175,12 @@
     }
     //点击专家热线
     if (btn.tag==2) {
-        _label.frame=CGRectMake(SCREEN_WIDTH/2.0+SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/10.0-2.0, SCREEN_WIDTH/6.0, 2.0);
+        
+        [_answerVC removeFromParentViewController];
+        [_answerVC.view removeFromSuperview];
+        
+        
+        _label.frame=CGRectMake(SCREEN_WIDTH/2.0+SCREEN_WIDTH/6.0,NAVBAR_HEIGHT+SCREEN_HEIGHT/13.0-2.0, SCREEN_WIDTH/6.0, 2.0);
         UIButton *answerBtn=[self.view viewWithTag:btn.tag-1];
         [answerBtn setImage:_btnArr[btn.tag-2] forState:UIControlStateNormal];
         //移除发布按钮

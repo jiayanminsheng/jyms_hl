@@ -16,6 +16,10 @@
 #define NAVBAR_HEIGHT                    64
 #define TABBAR_HEIGHT                    49
 
+#define IS_IPHONE                       (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define SCREEN_MAX_LENGTH               (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define IS_IPHONE_4_OR_LESS             (IS_IPHONE && SCREEN_MAX_LENGTH < 568.0)
+
 #endif /* CommonDefine_h */
 
 //Debug Log

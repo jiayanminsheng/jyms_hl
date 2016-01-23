@@ -9,5 +9,6 @@
 #import "RDVTabBarController.h"
 
 @interface RootViewController : RDVTabBarController
+@property (nonatomic,assign)NSInteger type;
 
 @end

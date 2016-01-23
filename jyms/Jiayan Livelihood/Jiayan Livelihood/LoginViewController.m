@@ -11,6 +11,7 @@
 #import "RootViewController.h"
 #import "AFHelper.h"
 #import "UserPrefs.h"
+#import "BQMImageView.h"
 
 
 
@@ -19,11 +20,22 @@
 @end
 
 @implementation LoginViewController
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if (self.type==1) {
+        BQMImageView *backBtn=[[BQMImageView alloc]initWithFrame:CGRectMake(10, 20, 30, 30)];
+        backBtn.image=[UIImage imageNamed:@"Safari-Forward.png"];
+        [backBtn addTarget:self action:@selector(gotoRootVC)];
+        [self.topImageView addSubview:backBtn];
+    }
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.topImageView.userInteractionEnabled=YES;
+    self.type=0;
     // Do any additional setup after loading the view from its nib.
-
     
 }
 
@@ -52,6 +64,8 @@
 //                [userPrefs saveUserName:_userTextField.text];
 //                [userPrefs saveUserPassword:_passwordTextField.text];
 //                [userPrefs saveuserID:userList[@"id"]];
+//                //头像
+////                [userPrefs saveuserheaderImage:<#(NSData *)#>];
 //                
 //                [self showHUDWithMessage:@"登录成功" view:self.view];
 //                [self performSelector:@selector(gotoRootVC) withObject:nil afterDelay:1];
@@ -75,7 +89,9 @@
 }
 -(void)gotoRootVC{
     RootViewController *rootVC=[[RootViewController alloc]init];
-    [self presentViewController:rootVC animated:NO completion:nil];
+    rootVC.type=self.type;
+//    [self presentViewController:rootVC animated:NO completion:nil];
+    [self.navigationController pushViewController:rootVC animated:YES];
 
 
 }

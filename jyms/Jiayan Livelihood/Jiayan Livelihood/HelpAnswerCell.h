@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *releasetimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *answercountLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *replyImageView;
 -(void)refreshHelpCellWithModel:(HelpModel *)model;
 
 @end

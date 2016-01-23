@@ -34,6 +34,11 @@
     //创建ui
     [self creatUI];
     
+    if(IS_IPHONE_4_OR_LESS)
+    {
+        NSLog(@"test");
+    }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -97,7 +102,7 @@
     _tableView.delegate=self;
     _tableView.dataSource=self;
     [_tableView setBounces:NO];
-    [_tableView setBackgroundColor:[UIColor redColor]];
+    [_tableView setBackgroundColor:[UIColor whiteColor]];
     [self.sellScrollView addSubview:_tableView];
     
     
@@ -161,6 +166,7 @@
     if (cell==nil)
     {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdientifer];
+        cell.selectionStyle= UITableViewCellSelectionStyleNone;
     }
     
     //设置分割线
@@ -210,6 +216,8 @@
     
 }
 
+
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return SCREEN_HEIGHT/5;
@@ -220,6 +228,7 @@
     SellDetailViewController *sdVC=[[SellDetailViewController alloc]init];
     [self.navigationController pushViewController:sdVC animated:YES];
 }
+
 
 //----------------------------------------------
 
@@ -249,25 +258,37 @@
 
 -(UILabel*)  loadTitle
 {
-    UILabel *labelTitle=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.35f, SCREEN_HEIGHT*0.032f, SCREEN_WIDTH*0.6f, SCREEN_HEIGHT*0.08f)];
-    NSString *str=@"山东潍坊县青萝卜，新鲜绿皮甜脆，1万斤出售";
-    [labelTitle setFont:[UIFont fontWithName:@"Marion" size:17]];
-    [labelTitle setNumberOfLines:0];
+    UILabel *labelTitle=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.35f, SCREEN_HEIGHT*0.02f, SCREEN_WIDTH*0.6f, SCREEN_HEIGHT*0.08f)];
+    NSString *str=@"山东潍坊县青萝卜";
+    [labelTitle setText:str];
     
-    NSMutableAttributedString * attributedString=[[NSMutableAttributedString alloc]initWithString:str];
-    NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle1 setLineSpacing:8];
-    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [str length])];
+    if(IS_IPHONE_4_OR_LESS)
+    {
+        [labelTitle  setFont:[UIFont systemFontOfSize:14]];
+    }
+    else
+    {
+        [labelTitle  setFont:[UIFont systemFontOfSize:16]];
+    }
     
-    [labelTitle setAttributedText:attributedString];
+    
     return labelTitle;
 }
 
 //加载产品名称
 -(UILabel*) loadProductName
 {
-    UILabel *productName=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.35f, SCREEN_HEIGHT*0.085f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
-    [productName setText:@"青萝卜"];
+    NSString *str=@"青萝卜";
+    UILabel *productName=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.35f, SCREEN_HEIGHT*0.06f, SCREEN_WIDTH*0.3, SCREEN_HEIGHT*0.08f)];
+    [productName setText:str];
+    if(IS_IPHONE_4_OR_LESS)
+    {
+        [productName  setFont:[UIFont systemFontOfSize:13]];
+    }
+    else
+    {
+        [productName  setFont:[UIFont systemFontOfSize:15]];
+    }
     [productName setTextColor:[UIColor colorWithRed:8.0f/255.0f green:158.0f/255.0f blue:22.0f/255.0f alpha:1.0f]];
     return  productName;
 }
@@ -275,18 +296,36 @@
 //加载产地
 -(UILabel*) loadSource
 {
-    UILabel *sourceName=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.65f, SCREEN_HEIGHT*0.085f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
-    [sourceName setText:@"山东寿光"];
+    NSString *str=@"山东寿光";
+    UILabel *sourceName=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.65f, SCREEN_HEIGHT*0.06f, SCREEN_WIDTH*0.3, SCREEN_HEIGHT*0.08f)];
+    [sourceName setText:str];
+    if(IS_IPHONE_4_OR_LESS)
+    {
+        [sourceName  setFont:[UIFont systemFontOfSize:13]];
+    }
+    else
+    {
+        [sourceName  setFont:[UIFont systemFontOfSize:15]];
+    }
+
     return  sourceName;
 }
 
 //加载产品价格
 -(UILabel*) loadPrice
 {
-    UILabel *labelPrice=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.35f, SCREEN_HEIGHT*0.12f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
+    UILabel *labelPrice=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.35f, SCREEN_HEIGHT*0.10f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
     CGFloat  price=3.0;
     NSString *strPrice=[NSString stringWithFormat:@"¥%.02f元／斤",price];
     [labelPrice setText:strPrice];
+    if(IS_IPHONE_4_OR_LESS)
+    {
+        [labelPrice  setFont:[UIFont systemFontOfSize:12]];
+    }
+    else
+    {
+        [labelPrice  setFont:[UIFont systemFontOfSize:14]];
+    }
     [labelPrice setTextColor:[UIColor colorWithRed:8.0f/255.0f green:158.0f/255.0f blue:22.0f/255.0f alpha:1.0f]];
     return labelPrice;
 }
@@ -294,10 +333,18 @@
 //加载产品总量
 -(UILabel*) loadAmount
 {
-    UILabel *labelAmount=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.65f, SCREEN_HEIGHT*0.12f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
+    UILabel *labelAmount=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.65f, SCREEN_HEIGHT*0.10f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
     NSInteger  amount=10000;
     NSString *strAmount=[NSString stringWithFormat:@"%ld斤",(long)amount];
     [labelAmount setText:strAmount];
+    if(IS_IPHONE_4_OR_LESS)
+    {
+        [labelAmount  setFont:[UIFont systemFontOfSize:12]];
+    }
+    else
+    {
+        [labelAmount  setFont:[UIFont systemFontOfSize:14]];
+    }
     
     return labelAmount;
     
@@ -306,10 +353,17 @@
 //加载发送时间
 -(UILabel*) loadDate
 {
-    UILabel *labelDate=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.8f, SCREEN_HEIGHT*0.14f, SCREEN_WIDTH*0.3f, SCREEN_HEIGHT*0.08f)];
+    UILabel *labelDate=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.75f, SCREEN_HEIGHT*0.12f, SCREEN_WIDTH*0.25f, SCREEN_HEIGHT*0.1f)];
     NSString *strDate=@"2015-10-10";
     [labelDate setText:strDate];
-    [labelDate setFont:[UIFont systemFontOfSize:13]];
+    if(IS_IPHONE_4_OR_LESS)
+    {
+        [labelDate  setFont:[UIFont systemFontOfSize:9]];
+    }
+    else
+    {
+        [labelDate  setFont:[UIFont systemFontOfSize:11]];
+    }
     [labelDate setTextColor:[UIColor lightGrayColor]];
     return labelDate;
 }

@@ -22,5 +22,9 @@
 @property (nonatomic,strong) NSNumber *question_status;
 @property (nonatomic,copy) NSString *username;
 @property (nonatomic,copy) NSString *addtime;
+
+//回答问题列表
+@property (nonatomic,copy) NSString *reply;
+@property (nonatomic,copy) NSString *status;
 +(HelpModel *)parseWithDic:(NSDictionary *)dic;
 @end

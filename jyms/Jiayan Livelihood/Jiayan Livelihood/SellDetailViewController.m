@@ -83,7 +83,7 @@
 
 -(void)loadDetailInfoView
 {
-    CGRect rect=CGRectMake(0,SCREEN_HEIGHT*0.6f, SCREEN_WIDTH, SCREEN_HEIGHT);
+    CGRect rect=CGRectMake(0,SCREEN_HEIGHT*0.57f, SCREEN_WIDTH, SCREEN_HEIGHT);
     UIView *detailView=[[UIView alloc]initWithFrame:rect];
     
     UIView *dTitle   = [self loadDetailTitle];  //图文详细标题
@@ -154,10 +154,11 @@
 //加载产品信息列表
 -(UITableView*)loadInfo
 {
-     CGRect rect=CGRectMake(0, SCREEN_HEIGHT*0.15f,SCREEN_WIDTH, SCREEN_HEIGHT*0.4f);
+     CGRect rect=CGRectMake(0, SCREEN_HEIGHT*0.15f,SCREEN_WIDTH, SCREEN_HEIGHT*0.3f);
      UITableView *tableInfo=[[UITableView alloc]initWithFrame:rect style:UITableViewStylePlain];
     tableInfo.delegate=self;
     tableInfo.dataSource=self;
+    tableInfo.userInteractionEnabled=NO;
     //[tableInfo.layer setBorderWidth:20.0f];
     tableInfo.tableHeaderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 0.01f, 0.01f)];
     tableInfo.tableFooterView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, 0.01f, 0.01f)];
@@ -228,6 +229,11 @@
     
     return cell;
 
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return  SCREEN_HEIGHT*0.06f;
 }
 
 

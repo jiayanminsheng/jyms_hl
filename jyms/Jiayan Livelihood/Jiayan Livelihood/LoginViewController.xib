@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
                 <outlet property="passwordTextField" destination="X9l-dJ-cN0" id="imt-zv-rPp"/>
+                <outlet property="topImageView" destination="FJJ-QK-j0h" id="9bT-MC-Zbc"/>
                 <outlet property="userTextField" destination="uk0-y3-T3z" id="naK-EN-ccN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -17,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="绿色顶图.png" id="FJJ-QK-j0h">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="绿色顶图.png" id="FJJ-QK-j0h">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="208"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                 </imageView>
@@ -77,7 +78,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="791" y="24"/>
+            <point key="canvasLocation" x="857" y="26"/>
         </view>
     </objects>
     <resources>

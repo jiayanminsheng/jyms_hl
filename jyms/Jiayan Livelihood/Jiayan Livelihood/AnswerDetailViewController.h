@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import "HelpModel.h"
 
-@interface AnswerDetailViewController : UIViewController
+@interface AnswerDetailViewController : BaseViewController
 @property (nonatomic,strong)HelpModel *questionModel;
 @end
